@@ -151,7 +151,7 @@ Saat jendela kamera aktif (fokus), gunakan tombol berikut:
 # 🎥 Demo Video
 
 Berikut adalah demonstrasi hasil tracking:
-**[MASUKKAN LINK VIDEO YOUTUBE/GOOGLE DRIVE DI SINI]**
+**[-]**
 
 ---
 
