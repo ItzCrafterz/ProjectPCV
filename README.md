@@ -328,5 +328,5 @@ Sistem ini membuktikan bahwa webcam standar dapat dimanfaatkan sebagai alat *mot
 
 ---
 
-*Dokumen ini disusun oleh Gilang Gallan Indrana (5024231030)*  
+*Dokumen ini disusun oleh Gilang Gallan Indrana - 5024231030*  
 *Departemen Teknik Komputer - Institut Teknologi Sepuluh Nopember*
