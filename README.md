@@ -9,14 +9,15 @@
 
 # 📌 Daftar Isi
 1. [Deskripsi Proyek](#-deskripsi-proyek)
-2. [Fitur Unggulan: Dual-Mode Tracking](#-fitur-unggulan-dual-mode-tracking)
-3. [Arsitektur & Alur Kerja](#-arsitektur--alur-kerja)
-4. [Detail Teknis Implementasi](#-detail-teknis-implementasi)
-5. [Prasyarat & Instalasi](#-prasyarat--instalasi)
-6. [Konfigurasi VSeeFace](#-konfigurasi-vseeface)
-7. [Cara Menjalankan Program](#-cara-menjalankan-program)
-8. [Demo Video](#-demo-video)
-9. [Kesimpulan](#-kesimpulan)
+2. [Evolusi Proyek: Beta hingga Final](#-evolusi-proyek-beta-hingga-final)
+3. [Fitur Unggulan: Dual-Mode Tracking](#-fitur-unggulan-dual-mode-tracking)
+4. [Arsitektur & Alur Kerja](#-arsitektur--alur-kerja)
+5. [Detail Teknis Implementasi](#-detail-teknis-implementasi)
+6. [Prasyarat & Instalasi](#-prasyarat--instalasi)
+7. [Konfigurasi VSeeFace](#-konfigurasi-vseeface)
+8. [Cara Menjalankan Program](#-cara-menjalankan-program)
+9. [Demo Video](#-demo-video)
+10. [Kesimpulan](#-kesimpulan)
 
 ---
 
@@ -28,9 +29,112 @@ Program ini membaca input video, mendeteksi titik-titik kunci tubuh manusia (lan
 
 ---
 
+# 🔄 Evolusi Proyek: Beta hingga Final
+
+Proyek ini dikembangkan melalui dua tahap utama yang menunjukkan progres dari visualisasi sederhana hingga integrasi aplikasi VTuber profesional.
+
+## 📁 ProyekBeta.py - Versi Awal (Stickman Visualization)
+
+### Overview
+File **ProyekBeta.py** adalah implementasi awal sistem yang fokus pada **deteksi dan visualisasi** gerakan manusia menggunakan representasi stickman. Versi ini dibuat sebagai proof-of-concept untuk memvalidasi kemampuan deteksi MediaPipe sebelum integrasi dengan sistem VTuber.
+
+### Fitur Utama ProyekBeta.py:
+1. **Full Body Detection**
+   - Deteksi pose 33 titik tubuh lengkap (kepala hingga kaki)
+   - Tracking untuk multiple persons (multi-orang dalam satu frame)
+   
+2. **Animated Stickman Rendering**
+   - Visualisasi real-time gerakan dalam bentuk stickman sederhana
+   - Animasi wajah dengan detail:
+     * **Kedipan mata** - Eye Aspect Ratio (EAR) detection
+     * **Gerakan mulut** - Deteksi buka/tutup mulut secara dinamis
+     * **Ekspresi alis** - Tracking gerakan eyebrow
+   
+3. **Hand & Finger Tracking**
+   - Deteksi 21 landmark per tangan
+   - Visualisasi jari-jari dengan struktur skeletal lengkap
+   - Support untuk kedua tangan secara simultan
+   
+4. **Dual Window Display**
+   - **Window 1:** Output kamera dengan overlay landmark MediaPipe
+   - **Window 2:** Pure stickman visualization dengan background hitam
+
+### Keunggulan Versi Beta:
+- ✅ **Tidak memerlukan software eksternal** - Standalone application
+- ✅ **Lightweight** - Cocok untuk PC dengan spesifikasi rendah
+- ✅ **Educational** - Visualisasi jelas untuk memahami deteksi pose
+- ✅ **Multi-person capable** - Dapat mendeteksi beberapa orang sekaligus
+
+### Teknologi yang Digunakan:
+```python
+- MediaPipe Pose (33 landmarks)
+- MediaPipe Face Mesh (468 landmarks)
+- MediaPipe Hands (21 landmarks per tangan)
+- OpenCV untuk rendering dan display
+- NumPy untuk kalkulasi geometris
+```
+
+### Screenshot Fitur Beta:
+- **Deteksi Pose**: Garis hijau menghubungkan sendi tubuh
+- **Face Animation**: Mata dan mulut bergerak sesuai ekspresi real
+- **Hand Skeleton**: Struktur jari tergambar detail dengan warna berbeda
+
+---
+
+## 📁 Proyek.py - Versi Final (VSeeFace Integration)
+
+### Overview
+File **Proyek.py** adalah evolusi dari versi beta yang mengintegrasikan deteksi gerakan dengan aplikasi **VSeeFace** melalui protokol OSC/VMC. Versi ini mentransformasi data deteksi menjadi data animasi avatar 3D profesional.
+
+### Peningkatan dari Beta ke Final:
+| Aspek | ProyekBeta.py | Proyek.py |
+|-------|---------------|-----------|
+| **Output** | Stickman 2D | Avatar VTuber 3D |
+| **Protokol** | Tidak ada | OSC/VMC Protocol |
+| **Stabilisasi** | Tidak ada | Kalman Filter |
+| **Target FPS** | Unlimited | 30 FPS (optimized) |
+| **Bone Rotation** | Tidak ada | Quaternion calculation |
+| **Mode Tracking** | Full body only | Dual-mode (Half/Full) |
+| **Eye Tracking** | Basic blink | 6DOF + Iris tracking |
+| **Finger Control** | Visualization only | Full articulation |
+
+### Fitur Tambahan Versi Final:
+1. **Advanced Head Tracking (6DOF)**
+   - Estimasi pose 3D menggunakan SolvePnP
+   - Rotasi kepala dan leher terpisah untuk gerakan natural
+   
+2. **Signal Smoothing**
+   - Kalman Filter untuk semua joint
+   - Eliminasi jitter dan noise webcam
+   
+3. **Body Decomposition**
+   - Rotasi Spine (60%) dan Chest (40%) terdistribusi
+   - Gerakan membungkuk yang lebih organik
+   
+4. **Professional Integration**
+   - Real-time data streaming ke VSeeFace
+   - Compatible dengan avatar VRM standar
+   - Live streaming ready
+
+### Kapan Menggunakan Versi Mana?
+
+**Gunakan ProyekBeta.py jika:**
+- 🎓 Belajar computer vision dan pose detection
+- 🖥️ PC tidak kuat menjalankan VSeeFace
+- 🔬 Melakukan eksperimen dengan deteksi multi-person
+- 📊 Membutuhkan visualisasi debug yang jelas
+
+**Gunakan Proyek.py jika:**
+- 🎥 Live streaming sebagai VTuber
+- 🎮 Presentasi dengan avatar 3D
+- 💼 Aplikasi profesional (virtual meeting, dll)
+- 🎭 Membutuhkan kualitas animasi tinggi
+
+---
+
 # ⚔️ Fitur Unggulan: Dual-Mode Tracking
 
-Salah satu fitur utama dari sistem ini adalah kemampuan untuk beralih antara dua mode tracking secara dinamis sesuai dengan kebutuhan pengguna (Streaming duduk vs. Berdiri).
+Salah satu fitur utama dari sistem final (Proyek.py) adalah kemampuan untuk beralih antara dua mode tracking secara dinamis sesuai dengan kebutuhan pengguna (Streaming duduk vs. Berdiri).
 
 ### 1. Mode Setengah Badan (Half Body Tracking) - *Default*
 Mode ini diaktifkan dengan menekan tombol **`H`**.
@@ -63,7 +167,7 @@ Pipeline pemrosesan data berjalan secara real-time (target 30 FPS):
 4.  **Signal Processing (Stabilization):**
     * Raw data dari kamera seringkali memiliki *jitter* (getaran).
     * Setiap sendi diproses melalui **Kalman Filter** untuk menghaluskan gerakan tanpa menambah latensi yang signifikan.
-5.  **Data Transmission:**
+5.  **Data Transmission (Proyek.py only):**
     * Data rotasi dikonversi menjadi **Quaternion** `(x, y, z, w)`.
     * Dikirim via UDP ke port `39539` (VMC Protocol).
 
@@ -95,6 +199,18 @@ Agar gerakan tubuh terlihat alami, rotasi bahu pengguna tidak hanya memutar satu
 * **Chest (Dada):** Menerima 40% sisanya.
 Hal ini membuat avatar membungkuk secara luwes (organic bending).
 
+### D. Eye Aspect Ratio (EAR) untuk Deteksi Kedipan
+Digunakan pada kedua versi untuk mendeteksi kapan mata tertutup:
+```python
+def calculate_ear(face_landmarks, indices, img_w, img_h):
+    # Menghitung rasio vertikal/horizontal mata
+    v1 = np.linalg.norm(coords[1] - coords[5])
+    v2 = np.linalg.norm(coords[2] - coords[4])
+    h  = np.linalg.norm(coords[0] - coords[3])
+    return (v1 + v2) / (2.0 * h + 1e-6)
+```
+Threshold: EAR < 0.15 = Mata Tertutup
+
 ---
 
 # 🛠️ Prasyarat & Instalasi
@@ -105,16 +221,25 @@ Hal ini membuat avatar membungkuk secara luwes (organic bending).
 
 ### Software Requirement
 1.  **Python 3.8** atau lebih baru.
-2.  **VSeeFace** (Aplikasi Receiver VTuber).
+2.  **VSeeFace** (Hanya untuk Proyek.py - Aplikasi Receiver VTuber).
 
 ### Instalasi Library
-Buka terminal/command prompt dan jalankan:
+
+#### Untuk ProyekBeta.py:
+```bash
+pip install opencv-python mediapipe numpy
+```
+
+#### Untuk Proyek.py (Tambahan):
 ```bash
 pip install opencv-python mediapipe numpy python-osc
 ```
+
 ---
 
 # ⚙️ Konfigurasi VSeeFace
+
+> **⚠️ Catatan:** Konfigurasi ini hanya diperlukan untuk **Proyek.py**. ProyekBeta.py tidak memerlukan VSeeFace.
 
 Agar avatar dapat bergerak, VSeeFace harus diatur sebagai *Receiver*:
 
@@ -129,17 +254,38 @@ Agar avatar dapat bergerak, VSeeFace harus diatur sebagai *Receiver*:
 
 # ▶️ Cara Menjalankan Program
 
+## Menjalankan ProyekBeta.py (Stickman Visualization)
+
+1.  Pastikan webcam terhubung.
+2.  Jalankan script Python:
+    ```bash
+    python ProyekBeta.py
+    ```
+3.  Dua jendela akan muncul:
+    - **Detection Output (Original)**: Kamera dengan overlay MediaPipe
+    - **Stickman Filter (Animated)**: Visualisasi stickman murni
+
+### 🎮 Kontrol ProyekBeta.py
+| Tombol | Fungsi |
+| :---: | :--- |
+| **`Q`** | Keluar dari program |
+
+---
+
+## Menjalankan Proyek.py (VTuber Tracking)
+
 1.  Pastikan webcam terhubung.
 2.  Jalankan VSeeFace terlebih dahulu.
 3.  Jalankan script Python:
     ```bash
     python Proyek.py
     ```
-4.  Jendela kamera akan muncul dengan overlay deteksi.
+4.  Jendela kamera akan muncul dengan overlay deteksi warna-warni:
+    - **Cyan**: Face landmarks
+    - **Magenta**: Pose/Body
+    - **Kuning**: Hand landmarks
 
-### 🎮 Kontrol Keyboard
-Saat jendela kamera aktif (fokus), gunakan tombol berikut:
-
+### 🎮 Kontrol Proyek.py
 | Tombol | Fungsi | Deskripsi |
 | :---: | :--- | :--- |
 | **`H`** | **Half Body Mode** | Mode Setengah Badan (Duduk). Fokus Kepala & Tangan. |
@@ -151,7 +297,7 @@ Saat jendela kamera aktif (fokus), gunakan tombol berikut:
 # 🎥 Demo Video
 
 Berikut adalah demonstrasi hasil tracking:
-**[-]**
+**[-]** 
 
 ---
 
@@ -163,8 +309,24 @@ Proyek ini berhasil mengimplementasikan sistem *Computer Vision* yang kompleks m
 2.  **Matematika Lanjut:** Penggunaan **Quaternion** dan **Matriks Rotasi** terbukti efektif menghindari *Gimbal Lock* yang sering terjadi pada animasi Euler angles biasa.
 3.  **Optimasi Noise:** Implementasi **Kalman Filter** memberikan dampak signifikan pada kehalusan gerakan, menjadikan avatar terlihat hidup dan tidak "gemetar" (jittery).
 4.  **Interaktivitas:** Fitur *Dual-Mode* (Setengah Badan vs. Seluruh Badan) memberikan fleksibilitas nyata bagi pengguna dalam berbagai skenario penggunaan.
+5.  **Iterasi Pengembangan:** Evolusi dari ProyekBeta.py (visualisasi) ke Proyek.py (aplikasi profesional) menunjukkan pemahaman mendalam tentang pipeline pengembangan sistem real-time.
 
 Sistem ini membuktikan bahwa webcam standar dapat dimanfaatkan sebagai alat *motion capture* yang andal dengan pemrosesan citra yang tepat.
 
 ---
-*Dokumen ini disusun oleh Gilang Gallan Indrana (5024231030)*
+
+## 📊 Perbandingan Akhir
+
+| Fitur | ProyekBeta.py | Proyek.py |
+|-------|---------------|-----------|
+| **Tujuan** | Proof-of-concept & Learning | Production-ready VTuber |
+| **Kompleksitas** | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
+| **Output** | Stickman 2D | Avatar 3D |
+| **Eksternal Software** | ❌ Tidak perlu | ✅ VSeeFace |
+| **Stabilisasi** | ❌ Raw data | ✅ Kalman Filter |
+| **Use Case** | Edukasi, Debug | Streaming, Profesional |
+
+---
+
+*Dokumen ini disusun oleh Gilang Gallan Indrana (5024231030)*  
+*Departemen Teknik Komputer - Institut Teknologi Sepuluh Nopember*
