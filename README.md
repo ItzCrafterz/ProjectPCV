@@ -7,6 +7,12 @@
 
 ---
 
+# 🎥 Demo Video
+
+Berikut adalah demonstrasi hasil tracking:
+**[https://drive.google.com/file/d/12_pPIChOhFAYVkCDjadbW_gulUcg3nK6/view?usp=sharing]** 
+---
+
 # 📌 Daftar Isi
 1. [Deskripsi Proyek](#-deskripsi-proyek)
 2. [Evolusi Proyek: Beta hingga Final](#-evolusi-proyek-beta-hingga-final)
@@ -16,8 +22,7 @@
 6. [Prasyarat & Instalasi](#-prasyarat--instalasi)
 7. [Konfigurasi VSeeFace](#-konfigurasi-vseeface)
 8. [Cara Menjalankan Program](#-cara-menjalankan-program)
-9. [Demo Video](#-demo-video)
-10. [Kesimpulan](#-kesimpulan)
+9. [Kesimpulan](#-kesimpulan)
 
 ---
 
@@ -291,13 +296,6 @@ Agar avatar dapat bergerak, VSeeFace harus diatur sebagai *Receiver*:
 | **`H`** | **Half Body Mode** | Mode Setengah Badan (Duduk). Fokus Kepala & Tangan. |
 | **`F`** | **Full Body Mode** | Mode Seluruh Badan (Berdiri). Mengaktifkan Kaki. |
 | **`Q`** | **Quit** | Menghentikan program dan menutup kamera. |
-
----
-
-# 🎥 Demo Video
-
-Berikut adalah demonstrasi hasil tracking:
-**[-]** 
 
 ---
 
